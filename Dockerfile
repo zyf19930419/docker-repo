@@ -6,7 +6,7 @@ RUN sed -i 's/http:\/\/archive\.ubuntu\.com\/ubuntu\//http:\/\/mirrors\.163\.com
 
 # for configure TensorFlow Headers
 ENV PYTHON_BIN_PATH=/usr/bin/python3 \
-    PYTHON_LIB_PATH=/usr/local/lib/python3.5/dist-packages \
+    PYTHON_LIB_PATH=/usr/local/lib/python3.5/dist-packages 
     #PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
 
 # Install dependencies and clone source code from github
@@ -15,11 +15,11 @@ RUN apt-get update && \
     git clone https://github.com/tensorflow/models.git /notebooks/model && \
     cd /notebooks/model/research &&\
     protoc object_detection/protos/*.proto --python_out=. &&\
-    export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
+    export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim 
 
 # Supress warnings about missing front-end. As recommended at:
 # http://stackoverflow.com/questions/22466255/is-it-possibe-to-answer-dialog-questions-when-installing-under-docker
-ARG DEBIAN_FRONTEND=noninteractive
+#ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get install -y --no-install-recommends apt-utils
 
 # Developer Essentials
