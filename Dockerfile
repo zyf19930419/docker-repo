@@ -10,7 +10,7 @@ ENV PYTHON_BIN_PATH=/usr/bin/python3 \
 
 # Install dependencies and clone source code from github
 RUN apt-get update && \
-    apt-get install -y git protobuf-compiler python-pil python-lxml && \
+    apt-get install -y wget git protobuf-compiler python-pil python-lxml && \
 
     git clone https://github.com/tensorflow/models.git /notebooks/model && \
 
