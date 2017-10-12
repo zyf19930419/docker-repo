@@ -2,7 +2,7 @@ FROM tensorflow/tensorflow:1.3.0-py3
 MAINTAINER Kevin Zhao <kevin8093@126.com>
 
 #using China mirror for ubuntu
-#RUN sed -i 's/http:\/\/archive\.ubuntu\.com\/ubuntu\//http:\/\/mirrors\.163\.com\/ubuntu\//g' /etc/apt/sources.list
+RUN sed -i 's/http:\/\/archive\.ubuntu\.com\/ubuntu\//http:\/\/mirrors\.163\.com\/ubuntu\//g' /etc/apt/sources.list
 
 # for configure TensorFlow Headers
 ENV PYTHON_BIN_PATH=/usr/bin/python3 \
@@ -13,10 +13,15 @@ RUN apt-get update && \
     apt-get install -y git protobuf-compiler python-pil python-lxml && \
 
     git clone https://github.com/tensorflow/models.git /notebooks/model && \
-    
+
     cd /notebooks/model/research && \
     protoc object_detection/protos/*.proto --python_out=. && \
-    export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim 
+    export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim && \
+
+    wget http://www.robots.ox.ac.uk/~vgg/data/pets/data/images.tar.gz && \
+    wget http://www.robots.ox.ac.uk/~vgg/data/pets/data/annotations.tar.gz && \
+    tar -xvf images.tar.gz && \
+    tar -xvf annotations.tar.gz && \
 
 RUN apt-get install -y --no-install-recommends apt-utils && \
 
