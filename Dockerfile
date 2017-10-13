@@ -8,7 +8,7 @@ MAINTAINER Kevin Zhao <kevin8093@126.com>
 ENV PYTHON_BIN_PATH=/usr/bin/python3 \
     PYTHON_LIB_PATH=/usr/local/lib/python3.5/dist-packages 
 
-# Install dependencies and clone source code from github
+# Install tensorflow object detection dependencies and clone source code from github
 RUN apt-get update && \
     apt-get install -y wget git protobuf-compiler python-pil python-lxml && \
 
@@ -23,7 +23,8 @@ RUN apt-get update && \
     tar -xvf images.tar.gz && \
     tar -xvf annotations.tar.gz && \
 
-RUN apt-get install -y --no-install-recommends apt-utils && \
+    #Opencv dependencies 
+    apt-get install -y --no-install-recommends apt-utils && \
 
     # Developer Essentials
     apt-get install -y --no-install-recommends curl unzip openssh-client wget && \
