@@ -18,11 +18,6 @@ RUN apt-get update && \
     protoc object_detection/protos/*.proto --python_out=. && \
     export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim && \
 
-    wget http://www.robots.ox.ac.uk/~vgg/data/pets/data/images.tar.gz && \
-    wget http://www.robots.ox.ac.uk/~vgg/data/pets/data/annotations.tar.gz && \
-    tar -xvf images.tar.gz && \
-    tar -xvf annotations.tar.gz && \
-
     #Opencv dependencies 
     apt-get install -y --no-install-recommends apt-utils && \
 
