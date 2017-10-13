@@ -1,0 +1,72 @@
+# web server
+#nginx:
+#  image: daocloud.io/nginx:latest
+#  ports:
+#    - "8080:8080"
+#    - "443:443"
+#  volumes:
+    # app
+#    - ./app/src:/usr/share/nginx/html
+    # nginx configs
+#    - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+#    - ./nginx/conf.d/:/etc/nginx/conf.d/:ro
+    # certificates
+    #- ./nginx/ca/server.crt/:/etc/nginx/server.crt:ro
+    #- ./nginx/ca/server.key/:/etc/nginx/server.key:ro
+  #links:
+  #  - php:php
+
+php:
+  build: ./php-apache
+  container_name: php-apache
+  ports:
+    - "80:80"
+    - "8080:8080"
+  volumes:
+    - ./app/src:/var/www/src
+    - ../../daoting:/var/www/data/
+   # - ./php-apache/php.ini:/usr/local/etc/php/
+
+  environment:
+    # Set your APP env variables here:
+    - APP_KEY= daoting 
+    - DB_HOST= 127.0.0.1
+    - DB_DATABASE= daoting
+    - DB_USERNAME= root 
+    - DB_PASSWORD= qwert1
+
+  links:
+    - mysql:mysql
+
+phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    ports:
+     - 8081:80
+    volumes:
+     - /sessions
+
+    environment:
+     - PMA_HOST=mysql
+     - PMA_ARBITRARY=1
+
+    links:
+    - mysql:mysql
+
+# database
+mysql:
+  image: daocloud.io/mysql:latest
+  container_name: mysql
+  ports:
+    # Allow client to access 3306
+    - "3306:3306"
+  volumes:
+    # NOTE: your data will be stored in ./mysql
+    - ./mysql:/var/lib/mysql
+    #- ./mysql/my.cnf:/etc/mysql/my.cnf 
+  environment:
+    #- MYSQL_DATABASE=daoting
+    - MYSQL_ROOT_PASSWORD=qwert1
+
+
