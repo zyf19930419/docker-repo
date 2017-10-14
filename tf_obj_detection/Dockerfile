@@ -2,7 +2,7 @@ FROM tensorflow/tensorflow:1.3.0-py3
 MAINTAINER Kevin Zhao <kevin8093@126.com>
 
 #using China mirror for ubuntu
-#RUN sed -i 's/http:\/\/archive\.ubuntu\.com\/ubuntu\//http:\/\/mirrors\.163\.com\/ubuntu\//g' /etc/apt/sources.list
+RUN sed -i 's/http:\/\/archive\.ubuntu\.com\/ubuntu\//http:\/\/mirrors\.163\.com\/ubuntu\//g' /etc/apt/sources.list
 
 # for configure TensorFlow Headers
 ENV PYTHON_BIN_PATH=/usr/bin/python3 \
