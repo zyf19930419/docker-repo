@@ -24,7 +24,7 @@ RUN echo "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8
     curl https://bazel.build/bazel-release.pub.gpg | apt-key add - && \
     apt-get update && \
     apt-get install -y git openjdk-8-jdk bazel wget&& \
-    git clone --recursive -b v1.10 https://github.com/deepmind/sonnet && \
+    git clone https://github.com/deepmind/sonnet && \
     cd sonnet/tensorflow && \
     ./configure && \
     cd .. && \
