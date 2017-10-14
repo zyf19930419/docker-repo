@@ -46,11 +46,7 @@ RUN wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz && \
   cd /tmp/ta-lib-py && python setup.py install && \
 
 #seaborn install
-<<<<<<< HEAD
-    pip3 install seaborn
-=======
   pip3 install seaborn
->>>>>>> origin/master
 
 #----------------------------------------------------------------------------------------
 
