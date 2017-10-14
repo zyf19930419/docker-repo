@@ -6,39 +6,12 @@ FROM tensorflow/tensorflow:1.3.0-py3
 #using China mirror for ubuntu
 RUN sed -i 's/http:\/\/archive\.ubuntu\.com\/ubuntu\//http:\/\/mirrors\.163\.com\/ubuntu\//g' /etc/apt/sources.list
 
-# for configure TensorFlow Headers
-#ENV PYTHON_BIN_PATH=/usr/bin/python3 \
-#    PYTHON_LIB_PATH=/usr/local/lib/python3.5/dist-packages \
-#    TF_NEED_MKL=0 \
-#    CC_OPT_FLAGS=-march=native \
-#    TF_NEED_JEMALLOC=1 \
-#    TF_NEED_GCP=0 \
-#    TF_NEED_HDFS=0 \
-#    TF_ENABLE_XLA=0 \
-#    TF_NEED_VERBS=0 \
-#    TF_NEED_OPENCL=0 \
-#    TF_NEED_CUDA=0
-
-# install git & bazel, Configure TensorFlow Headers, Build and run the installer
-#RUN echo "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list && \
-#    curl https://bazel.build/bazel-release.pub.gpg | apt-key add - && \
-#    apt-get update && \
-#    apt-get install -y git openjdk-8-jdk bazel wget&& \
-#    git clone https://github.com/deepmind/sonnet && \
-#    cd sonnet/tensorflow && \
-#    ./configure && \
-#    cd .. && \
-#    mkdir /tmp/sonnet && \
-#    bazel build --config=opt --copt="-D_GLIBCXX_USE_CXX11_ABI=0" :install && \
-#    ./bazel-bin/install /tmp/sonnet python3 && \
-#    pip3 install distribute /tmp/sonnet/*.whl
-
-RUN pip3 install dm-sonnet
-
+#sonnet
+RUN pip3 install dm-sonnet && \
 #----------------------------------------------------------------------------------------
 
 #TA-LIB
-RUN apt-get update && \
+    apt-get update && \
     apt-get install -y git  wget && \
     wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz && \
     tar -xvzf ta-lib-0.4.0-src.tar.gz && \
@@ -50,12 +23,11 @@ RUN apt-get update && \
     cd /tmp/ta-lib-py && python setup.py install && \
 
 #seaborn install
-    pip3 install seaborn
-
+    pip3 install seaborn && \
 #----------------------------------------------------------------------------------------
 
 #required by rqalpha
-RUN apt-get install -y language-pack-en  && \
+    apt-get install -y language-pack-en  && \
     locale-gen en_US.UTF-8 && \
     dpkg-reconfigure locales
 
