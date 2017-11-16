@@ -1,4 +1,4 @@
-FROM tensorflow/tensorflow:1.3.0-py3
+FROM tensorflow/tensorflow:1.4.0-py3
 
 #usage: 
 #docker run -it -v ~/Workspace/tf_model/notebooks:/notebooks -p 8888:8888 -p 6006:6006 kevin8093/tf_sonnet_talib
@@ -51,4 +51,9 @@ RUN pip install -U pip setuptools cython -i https://pypi.tuna.tsinghua.edu.cn/si
 RUN echo "c.NotebookApp.ip = '*'" \
          "\nc.NotebookApp.open_browser = False" \
          "\nc.NotebookApp.token = ''" \
-         > /root/.jupyter/jupyter_notebook_config.py
+         > /root/.jupyter/jupyter_notebook_config.py && \
+
+#----------------------------------------------------------------------------------------
+#mysql support
+    apt-get install -y libmysqlclient-dev && \
+    pip3 install --no-cache-dir mysqlclient
