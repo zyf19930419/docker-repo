@@ -9,7 +9,6 @@ RUN sed -i 's/http:\/\/archive\.ubuntu\.com\/ubuntu\//http:\/\/mirrors\.163\.com
 #sonnet
 RUN pip3 install dm-sonnet && \
 #----------------------------------------------------------------------------------------
-
 #TA-LIB
     apt-get update && \
     apt-get install -y git  wget && \
@@ -21,30 +20,24 @@ RUN pip3 install dm-sonnet && \
     make install && \
     git clone https://github.com/mrjbq7/ta-lib.git /tmp/ta-lib-py && \
     cd /tmp/ta-lib-py && python setup.py install && \
-
 #seaborn install
     pip3 install seaborn && \
 #----------------------------------------------------------------------------------------
-
 #required by rqalpha
-    apt-get install -y language-pack-en  && \
+    apt-get install -y language-pack-en && \
     locale-gen en_US.UTF-8 && \
     dpkg-reconfigure locales
 
 ENV LC_ALL=en_US.UTF-8
 ENV LANG=en_US.UTF-8
 ENV LANGUAGE=en_US.UTF-8
-
 #rqalpha
 RUN pip install -U pip setuptools cython -i https://pypi.tuna.tsinghua.edu.cn/simple && \
     pip install bcolz -i https://pypi.tuna.tsinghua.edu.cn/simple && \
     pip install -i https://pypi.tuna.tsinghua.edu.cn/simple rqalpha && \
     rqalpha update_bundle && \
-
 #----------------------------------------------------------------------------------------
-
     pip3 install --no-cache-dir mock grpcio && \
-
     rm -rf /tmp/*
 
 # NOTE: disable authentication token for convenience. DON'T DO THIS ON A PUBLIC SERVER.
@@ -52,8 +45,13 @@ RUN echo "c.NotebookApp.ip = '*'" \
          "\nc.NotebookApp.open_browser = False" \
          "\nc.NotebookApp.token = ''" \
          > /root/.jupyter/jupyter_notebook_config.py && \
-
 #----------------------------------------------------------------------------------------
 #mysql support
-    apt-get install -y libmysqlclient-dev && \
-    pip3 install --no-cache-dir mysqlclient
+    apt-get update && \
+    apt-get install -y python-dev libmysqlclient-dev && \
+    pip3 install --no-cache-dir mysqlclient && \
+    pip3 install SQLAlchemy && \
+#----------------------------------------------------------------------------------------
+#beautiful soap
+    apt-get update && \
+    apt-get install -y Python-bs4
