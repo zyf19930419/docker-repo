@@ -50,8 +50,7 @@ RUN echo "c.NotebookApp.ip = '*'" \
     apt-get update && \
     apt-get install -y python-dev libmysqlclient-dev && \
     pip3 install --no-cache-dir mysqlclient && \
-    pip3 install SQLAlchemy && \
+    pip3 install --no-cache-dir SQLAlchemy && \
 #----------------------------------------------------------------------------------------
 #beautiful soap
-    apt-get update && \
-    apt-get install -y Python-bs4
+    pip3 install --no-cache-dir beautifulsoup4
