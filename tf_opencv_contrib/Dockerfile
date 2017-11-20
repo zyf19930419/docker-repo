@@ -1,5 +1,5 @@
 
-FROM tensorflow/tensorflow:1.3.0-py3
+FROM tensorflow/tensorflow:1.4.0-py3
 MAINTAINER Kevin Zhao <kevin8093@126.com>
 
 #Usage
@@ -25,7 +25,7 @@ RUN apt-get install -y --no-install-recommends build-essential cmake
 RUN apt-get install -y --no-install-recommends libopenblas-dev
 
 #
-# OpenCV 3.2
+# OpenCV Latest
 #
 # Dependencies
 RUN apt-get install -y --no-install-recommends \

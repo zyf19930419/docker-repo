@@ -1,4 +1,4 @@
-FROM tensorflow/tensorflow:1.3.0-py3
+FROM tensorflow/tensorflow:1.4.0-py3
 MAINTAINER Kevin Zhao <kevin8093@126.com>
 
 #using China mirror for ubuntu
