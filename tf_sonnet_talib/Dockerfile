@@ -54,3 +54,6 @@ RUN echo "c.NotebookApp.ip = '*'" \
 #----------------------------------------------------------------------------------------
 #beautiful soap
     pip3 install --no-cache-dir beautifulsoup4
+
+RUN pip3 install --no-cache-dir lxml && \
+    pip3 install --no-cache-dir Tushare
