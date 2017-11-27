@@ -38,16 +38,10 @@ RUN pip install -U pip setuptools cython -i https://pypi.tuna.tsinghua.edu.cn/si
     rqalpha update_bundle && \
 #----------------------------------------------------------------------------------------
     pip3 install --no-cache-dir mock grpcio && \
-    rm -rf /tmp/*
-
-# NOTE: disable authentication token for convenience. DON'T DO THIS ON A PUBLIC SERVER.
-#RUN echo "c.NotebookApp.ip = '*'" \
-#         "\nc.NotebookApp.open_browser = False" \
-#         "\nc.NotebookApp.token = ''" \
-#         > /root/.jupyter/jupyter_notebook_config.py && \
+    rm -rf /tmp/* && \
 #----------------------------------------------------------------------------------------
 #mysql support
-RUN apt-get update && \
+    apt-get update && \
     apt-get install -y python-dev libmysqlclient-dev && \
     pip3 install --no-cache-dir mysqlclient && \
     pip3 install --no-cache-dir SQLAlchemy && \
@@ -56,7 +50,11 @@ RUN apt-get update && \
     pip3 install --no-cache-dir beautifulsoup4
 
 RUN pip3 install --no-cache-dir lxml && \
-    pip3 install --no-cache-dir Tushare && \
+    pip3 install --no-cache-dir Tushare 
 
 #update config file of Jupyter, it depends on your local configuration
-COPY jupyter_notebook_config.py /root/.jupyter/
+RUN echo "from IPython.lib import passwd" \
+         "c.NotebookApp.ip = '*'" \
+         "\nc.NotebookApp.open_browser = False" \
+         "c.NotebookApp.password = passwd("YourPassword")" \
+         > /root/.jupyter/jupyter_notebook_config.py
