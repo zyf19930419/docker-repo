@@ -54,7 +54,7 @@ RUN pip3 install --no-cache-dir lxml && \
 
 #update config file of Jupyter, it depends on your local configuration
 RUN echo "from IPython.lib import passwd" \
-         "c.NotebookApp.ip = '*'" \
+         "\nc.NotebookApp.ip = '*'" \
          "\nc.NotebookApp.open_browser = False" \
-         "c.NotebookApp.password = passwd("YourPassword")" \
+         "\nc.NotebookApp.password = passwd('YourPassword')" \
          > /root/.jupyter/jupyter_notebook_config.py
