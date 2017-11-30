@@ -64,6 +64,3 @@ RUN echo "c.NotebookApp.ip = '*'" \
          "\nc.NotebookApp.open_browser = False" \
          "\nc.NotebookApp.token = ''" \
          > /root/.jupyter/jupyter_notebook_config.py
-         
-EXPOSE 7777
-         
