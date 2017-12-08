@@ -11,10 +11,10 @@ RUN sed -i 's/http:\/\/archive\.ubuntu\.com\/ubuntu\//http:\/\/mirrors\.163\.com
 # http://stackoverflow.com/questions/22466255/is-it-possibe-to-answer-dialog-questions-when-installing-under-docker
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update  && \
-	apt-get install -y --no-install-recommends apt-utils && \
-	apt-get install -y --no-install-recommends git curl vim unzip openssh-client wget && \
-	apt-get install -y --no-install-recommends build-essential cmake && \
-	apt-get install -y --no-install-recommends libopenblas-dev
+    apt-get install -y --no-install-recommends apt-utils && \
+    apt-get install -y --no-install-recommends git curl vim unzip openssh-client wget && \
+    apt-get install -y --no-install-recommends build-essential cmake && \
+    apt-get install -y --no-install-recommends libopenblas-dev
 
 #
 # OpenCV Latest
@@ -32,22 +32,22 @@ RUN git clone https://github.com/opencv/opencv.git /usr/local/src/opencv && \
 # Compile
 RUN cd /usr/local/src/opencv && mkdir build && cd build && \
     cmake -D BUILD_TESTS=OFF \
-		  -D BUILD_opencv_gpu=OFF \
+	  -D BUILD_opencv_gpu=OFF \
           -D BUILD_PERF_TESTS=OFF \
-	      -D CMAKE_INSTALL_PREFIX=/usr/local \
+	  -D CMAKE_INSTALL_PREFIX=/usr/local \
           -D OPENCV_EXTRA_MODULES_PATH=/usr/local/src/opencv_contrib/modules \
           -D OPENCV_EXTRA_MODULES_PATH=/usr/local/src/opencv_contrib/modules -D BUILD_opencv_xfeatures2d=OFF /usr/local/src/opencv \
           -D OPENCV_EXTRA_MODULES_PATH=/usr/local/src/opencv_contrib/modules -D BUILD_opencv_dnn_modern=OFF /usr/local/src/opencv \
           -D OPENCV_EXTRA_MODULES_PATH=/usr/local/src/opencv_contrib/modules -D BUILD_opencv_dnns_easily_fooled=OFF /usr/local/src/opencv \
           -D PYTHON_DEFAULT_EXECUTABLE=$(which python3) \
-		  -D WITH_IPP=OFF \
+	  -D WITH_IPP=OFF \
           .. && \
     make -j"$(nproc)" && \
     make install && \
-	rm -rf /usr/local/src/opencv && \
-	rm -rf /usr/local/src/opencv_contrib
+    rm -rf /usr/local/src/opencv && \
+    rm -rf /usr/local/src/opencv_contrib
 
-RUN	apt-get update && \
+RUN apt-get update && \
     apt-get install -y python-dev libmysqlclient-dev && \
     pip3 install --no-cache-dir mysqlclient && \
     pip3 install --no-cache-dir SQLAlchemy
