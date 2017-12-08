@@ -65,6 +65,11 @@ RUN echo "c.NotebookApp.ip = '*'" \
          "\nc.NotebookApp.token = ''" \
          > /root/.jupyter/jupyter_notebook_config.py
 
-         
+#install object detection
+RUN git clone https://github.com/tensorflow/models.git /test/model && \
+
+    cd /test/model/research && \
+    protoc object_detection/protos/*.proto --python_out=. && \
+    export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim && \
 EXPOSE 7777
          
