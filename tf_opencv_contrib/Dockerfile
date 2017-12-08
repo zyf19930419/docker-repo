@@ -57,6 +57,7 @@ RUN apt-get update && \
 #
 RUN apt-get autoremove && \
     apt-get clean
+    
 #update config file of Jupyter, it depends on your local configuration
 RUN echo "from IPython.lib import passwd" \
          "\nc.NotebookApp.ip = '*'" \
