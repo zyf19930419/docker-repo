@@ -59,3 +59,15 @@ RUN echo "from IPython.lib import passwd" \
          "\nc.NotebookApp.open_browser = False" \
          "\nc.NotebookApp.password = passwd('YourPassword')" \
          > /root/.jupyter/jupyter_notebook_config.py
+
+RUN cd /root/.jupyter && mkdir nbconfig && \
+    echo "{" \
+         "  "Editor": {" \
+         "      "codemirror_options": {" \
+         "          "indentUnit": 4," \
+         "          "vimMode": false," \
+         "          "keyMap": "sublime"" \
+         "      }" \
+         "  }" \
+         "}" \
+         > /root/.jupyter/nbconfig/edit.json
