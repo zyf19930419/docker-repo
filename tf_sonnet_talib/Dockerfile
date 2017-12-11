@@ -71,3 +71,6 @@ RUN cd /root/.jupyter && mkdir nbconfig && \
          "  }" \
          "}" \
          > /root/.jupyter/nbconfig/edit.json
+
+RUN mkdir /root/Ares
+WORKDIR "/root/Ares"
