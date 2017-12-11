@@ -64,3 +64,10 @@ RUN echo "from IPython.lib import passwd" \
          "\nc.NotebookApp.open_browser = False" \
          "\nc.NotebookApp.password = passwd('YourPassword')" \
          > /root/.jupyter/jupyter_notebook_config.py
+#install object detection
+RUN apt-get update && \
+    apt-get install -y wget git protobuf-compiler python-pil python-lxml && \
+    git clone https://github.com/tensorflow/models.git /tf_obj/model && \
+    cd /tf_obj/model/research && \
+    protoc object_detection/protos/*.proto --python_out=. && \
+    export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
