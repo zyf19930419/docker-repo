@@ -22,7 +22,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     rsync \
     software-properties-common \
     unzip \
-    git \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
