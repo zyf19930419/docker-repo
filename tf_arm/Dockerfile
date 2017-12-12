@@ -2,6 +2,8 @@ FROM arm32v7/ubuntu:16.04
 
 LABEL maintainer="Kevin Zhao <kevin8093@126.com>"
 
+RUN sed -i 's/http:\/\/archive\.ubuntu\.com\/ubuntu\//http:\/\/mirrors\.163\.com\/ubuntu\//g' /etc/apt/sources.list
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     curl \
