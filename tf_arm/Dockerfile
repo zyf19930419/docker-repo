@@ -36,7 +36,7 @@ RUN pip --no-cache-dir install \
      && \
      python -m ipykernel.kernelspec
 
-ADD tensorflow-1.3.0-cp27-none-linux_armv7l.whl .
+ADD tensorflow-1.3.0-cp34-cp34m-linux_armv7l.whl .
 
 RUN pip --no-cache-dir install tensorflow-1.3.0-cp27-none-linux_armv7l.whl && \
     rm -f tensorflow-1.3.0-cp27-none-linux_armv7l.whl
