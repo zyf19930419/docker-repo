@@ -64,4 +64,5 @@ RUN echo "from IPython.lib import passwd" \
          "\nc.NotebookApp.open_browser = False" \
          "\nc.NotebookApp.password = passwd('YourPassword')" \
          > /root/.jupyter/jupyter_notebook_config.py
+
 EXPOSE 5555
