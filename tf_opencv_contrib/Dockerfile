@@ -51,7 +51,9 @@ RUN apt-get update && \
     apt-get install -y python-dev libmysqlclient-dev && \
     pip3 install --no-cache-dir mysqlclient && \
     pip3 install --no-cache-dir SQLAlchemy
-	
+
+EXPOSE 5555
+
 #
 # Cleanup
 #
@@ -65,4 +67,3 @@ RUN echo "from IPython.lib import passwd" \
          "\nc.NotebookApp.password = passwd('YourPassword')" \
          > /root/.jupyter/jupyter_notebook_config.py
 
-EXPOSE 5555
